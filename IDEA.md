@@ -1,6 +1,6 @@
 # My app
 
-**Domain:**
+**Domain: FC Barcelona La Masia Academy Talent Tracker**
 
 **User story:** As a ___, I need to ___, so that ___.
 
