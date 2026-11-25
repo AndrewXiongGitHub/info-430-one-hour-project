@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10172c">
+  <title>La Masia Prospect Watch</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #17213a;
+      background: #f3f5f9;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      --navy: #10172c;
+      --muted: #6b7487;
+      --line: #e7eaf0;
+      --red: #a51d35;
+      --blue: #164b9b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+    }
+
+    .topbar {
+      height: 8px;
+      background: linear-gradient(90deg, #a51d35 0 50%, #164b9b 50% 100%);
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 38px 0 56px;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 48px;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .crest {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border: 1px solid #dfe3eb;
+      border-radius: 12px;
+      background: white;
+      color: var(--red);
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(30px, 6vw, 64px);
+      border-radius: 24px;
+      background:
+        radial-gradient(ellipse at 92% 10%, rgba(52, 94, 164, 0.38), transparent 34%),
+        linear-gradient(120deg, #10172c, #182544);
+      color: white;
+      box-shadow: 0 22px 50px rgba(16, 23, 44, 0.13);
+    }
+
+    .hero::after {
+      position: absolute;
+      right: -72px;
+      bottom: -180px;
+      width: 380px;
+      height: 380px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 50%;
+      box-shadow: 0 0 0 34px rgba(255, 255, 255, 0.025), 0 0 0 68px rgba(255, 255, 255, 0.025);
+      content: "";
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      color: #f3c856;
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 620px;
+      margin: 0;
+      font-size: clamp(36px, 6vw, 62px);
+      letter-spacing: -0.055em;
+      line-height: 1.04;
+    }
+
+    .intro {
+      max-width: 550px;
+      margin: 20px 0 0;
+      color: #c4ccdc;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      margin-top: -1px;
+      padding: 30px clamp(20px, 4vw, 42px) 34px;
+      border: 1px solid var(--line);
+      border-top: 0;
+      border-radius: 0 0 22px 22px;
+      background: white;
+      box-shadow: 0 18px 45px rgba(25, 38, 65, 0.06);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 21px;
+      letter-spacing: -0.025em;
+    }
+
+    .demo-note {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .count {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      border: 1px solid #e8ebf1;
+      border-radius: 999px;
+      color: #59647a;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .search-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #3b465c;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: minmax(260px, 2fr) minmax(150px, 1fr) minmax(220px, 1.2fr);
+      align-items: end;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .search-wrap {
+      position: relative;
+    }
+
+    .search-wrap svg {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      width: 18px;
+      height: 18px;
+      color: #818a9b;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    input[type="search"],
+    select,
+    .age-range input {
+      width: 100%;
+      height: 48px;
+      padding: 0 12px;
+      border: 1px solid #dfe4ec;
+      border-radius: 11px;
+      outline: none;
+      background: #fbfcfe;
+      color: var(--navy);
+      font: inherit;
+      font-size: 14px;
+      transition: border-color 150ms ease, box-shadow 150ms ease, background 150ms ease;
+    }
+
+    input[type="search"] {
+      padding-left: 44px;
+    }
+
+    input[type="search"]::placeholder {
+      color: #929aaa;
+    }
+
+    .age-range {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .age-range span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    input[type="search"]:focus,
+    select:focus,
+    .age-range input:focus {
+      border-color: #5779b2;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(22, 75, 155, 0.12);
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    thead {
+      background: #f8f9fb;
+    }
+
+    th {
+      padding: 14px 18px;
+      color: #6b7487;
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 17px 18px;
+      border-top: 1px solid var(--line);
+      color: #374258;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      transition: background 120ms ease;
+    }
+
+    tbody tr:hover {
+      background: #fafbfe;
+    }
+
+    .player-name {
+      color: var(--navy);
+      font-weight: 720;
+    }
+
+    .position {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: #edf3fb;
+      color: #244e87;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .empty-state {
+      padding: 28px 18px;
+      color: var(--muted);
+      text-align: center;
+      white-space: normal;
+    }
+
+    .footer-note {
+      margin: 16px 2px 0;
+      color: #858d9d;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      overflow: hidden;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      border: 0;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+    }
+
+    @media (max-width: 800px) {
+      .filter-grid {
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      }
+
+      .search-control {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 24px, 1120px);
+        padding-top: 24px;
+      }
+
+      .masthead {
+        margin-bottom: 28px;
+      }
+
+      .section-heading {
+        align-items: start;
+      }
+
+      .filter-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .search-control {
+        grid-column: auto;
+      }
+
+      th,
+      td {
+        padding-right: 14px;
+        padding-left: 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar" aria-hidden="true"></div>
+  <main class="page">
+    <header class="masthead">
+      <span class="crest" aria-hidden="true">FCB</span>
+      <span>La Masia · Prospect Watch</span>
+    </header>
+
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">The future is being shaped</p>
+      <h1 id="page-title">Meet the next generation.</h1>
+      <p class="intro">A simple guide to the academy prospects to keep an eye on. Search by name, position, or nationality to find a player.</p>
+    </section>
+
+    <section class="content" aria-labelledby="prospects-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="prospects-title">Academy prospects</h2>
+          <p class="demo-note">Explore the players and their latest scouting notes.</p>
+        </div>
+        <span class="count" id="result-count" aria-live="polite">Loading…</span>
+      </div>
+
+      <div class="filter-grid">
+        <div class="filter-control search-control">
+          <label class="search-label" for="prospect-search">Find a prospect</label>
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <circle cx="10.8" cy="10.8" r="6.8"></circle>
+              <path d="m16 16 4.5 4.5"></path>
+            </svg>
+            <input id="prospect-search" type="search" placeholder="Try a name, position, or nationality…" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="filter-control">
+          <label class="search-label" for="squad-filter">Academy squad</label>
+          <select id="squad-filter">
+            <option value="">All squads</option>
+            <option value="Barça Atlètic">Barça Atlètic</option>
+            <option value="Juvenil A">Juvenil A</option>
+            <option value="Juvenil B">Juvenil B</option>
+            <option value="Cadet A">Cadet A</option>
+          </select>
+        </div>
+
+        <div class="filter-control">
+          <span class="search-label">Age range</span>
+          <div class="age-range">
+            <label class="visually-hidden" for="minimum-age">Minimum age</label>
+            <input id="minimum-age" type="number" min="14" max="20" step="1" placeholder="Min" inputmode="numeric">
+            <span aria-hidden="true">to</span>
+            <label class="visually-hidden" for="maximum-age">Maximum age</label>
+            <input id="maximum-age" type="number" min="14" max="20" step="1" placeholder="Max" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Prospect</th>
+              <th scope="col">Age</th>
+              <th scope="col">Position</th>
+              <th scope="col">Nationality</th>
+              <th scope="col">Squad</th>
+              <th scope="col">Strength</th>
+              <th scope="col">Development focus</th>
+              <th scope="col">Watch for</th>
+            </tr>
+          </thead>
+          <tbody id="prospect-rows">
+            <tr><td class="empty-state" colspan="8">Loading prospect profiles…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="footer-note">All prospect profiles are fictional examples for this class project, not real player records.</p>
+    </section>
+  </main>
+
+  <script>
+    const searchInput = document.querySelector("#prospect-search");
+    const squadFilter = document.querySelector("#squad-filter");
+    const minimumAgeInput = document.querySelector("#minimum-age");
+    const maximumAgeInput = document.querySelector("#maximum-age");
+    const prospectRows = document.querySelector("#prospect-rows");
+    const resultCount = document.querySelector("#result-count");
+    let activeRequest;
+
+    function renderProspects(prospects) {
+      resultCount.textContent = `${prospects.length} ${prospects.length === 1 ? "prospect" : "prospects"}`;
+      prospectRows.replaceChildren();
+
+      if (prospects.length === 0) {
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+        cell.className = "empty-state";
+        cell.colSpan = 8;
+        cell.textContent = "No prospects match that search. Try another name, position, or nationality.";
+        row.append(cell);
+        prospectRows.append(row);
+        return;
+      }
+
+      for (const prospect of prospects) {
+        const row = document.createElement("tr");
+        const name = document.createElement("td");
+        name.className = "player-name";
+        name.textContent = prospect.name;
+        row.append(name);
+
+        const values = [
+          String(prospect.age),
+          prospect.position,
+          prospect.nationality,
+          prospect.squad,
+          prospect.strength,
+          prospect.developmentFocus,
+          prospect.watchFor
+        ];
+        for (const value of values) {
+          const cell = document.createElement("td");
+          cell.textContent = value;
+          row.append(cell);
+        }
+
+        prospectRows.append(row);
+      }
+    }
+
+    async function loadProspects() {
+      if (activeRequest) {
+        activeRequest.abort();
+      }
+      activeRequest = new AbortController();
+      resultCount.textContent = "Searching…";
+
+      const params = new URLSearchParams({
+        search: searchInput.value,
+        squad: squadFilter.value,
+        minAge: minimumAgeInput.value,
+        maxAge: maximumAgeInput.value
+      });
+      try {
+        const response = await fetch(`/api/prospects?${params}`, { signal: activeRequest.signal });
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+        renderProspects(await response.json());
+      } catch (error) {
+        if (error.name === "AbortError") {
+          return;
+        }
+        resultCount.textContent = "Unavailable";
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+        cell.className = "empty-state";
+        cell.colSpan = 8;
+        cell.textContent = "Prospect profiles could not be loaded. Check the server and database, then try again.";
+        row.append(cell);
+        prospectRows.replaceChildren(row);
+        console.error("Could not load prospect profiles:", error);
+      }
+    }
+
+    searchInput.addEventListener("input", loadProspects);
+    squadFilter.addEventListener("change", loadProspects);
+    minimumAgeInput.addEventListener("input", loadProspects);
+    maximumAgeInput.addEventListener("input", loadProspects);
+    loadProspects();
+  </script>
+</body>
+</html>
